@@ -2,6 +2,15 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
+article_register:
+    path: /register
+    defaults: { _controller: AppBundle:Users:register}
+    methods:  [POST]
+
+article_oauth:
+    path: /oauth
+    defaults: { _controller: AppBundle:Users:oauth}
+    methods:  [POST]
 
 article_properties:
     path: /properties

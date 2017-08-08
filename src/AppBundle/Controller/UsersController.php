@@ -47,6 +47,8 @@ class UsersController extends FOSRestController
         $em->persist($user);
         $em->flush();
 
+
+        return ['data' => ['token' =>$user->getToken(),'user_id' => $user->getUserId()]];
     }
 
     public function oauthAction(Request $request)
@@ -58,11 +60,8 @@ class UsersController extends FOSRestController
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['email'=>$email, 'password'=>$password]);
 
-
         if($user){
-
-
-            return ($user);
+            return ['data' => ['token' =>$user->getToken(),'user_id' => $user->getUserId()]];
         }else{
             return (['message'=> 'User does not exist']);
         }

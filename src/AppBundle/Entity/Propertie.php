@@ -164,5 +164,7 @@ class Propertie
     {
         return $this->updated;
     }
+
+
 }
 

@@ -17,6 +17,11 @@ article_properties:
     defaults: { _controller: AppBundle:Properties:index}
     methods:  [GET]
 
+article_properties:
+    path: /token
+    defaults: { _controller: AppBundle:Properties:token}
+    methods:  [GET]
+
 article_properties_show:
     path: /properties/{id}
     defaults: { _controller: AppBundle:Properties:show}

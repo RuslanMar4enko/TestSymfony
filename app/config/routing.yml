@@ -1,0 +1,31 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+
+article_properties:
+    path: /properties
+    defaults: { _controller: AppBundle:Properties:index}
+    methods:  [GET]
+
+article_properties_show:
+    path: /properties/{id}
+    defaults: { _controller: AppBundle:Properties:show}
+    methods:  [GET]
+
+
+article_properties_create:
+    path: /properties
+    defaults: { _controller: AppBundle:Properties:create}
+    methods:  [POST]
+
+
+article_properties_update:
+    path: /properties/{id}/edit
+    defaults: { _controller: AppBundle:Properties:update}
+    methods:  [PUT]
+
+article_properties_delete:
+    path: /properties/{id}
+    defaults: { _controller: AppBundle:Properties:delete}
+    methods:  [DELETE]

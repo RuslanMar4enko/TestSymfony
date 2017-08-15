@@ -29,11 +29,14 @@ class PropertiesController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        if (!$user){
+            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+        }
         $uri = $request->getUri();
         $method = $request->getMethod();
         $body = $request->request->all();
         $body =  implode($body);
-        $timestamp = $user->getCreated();
+        $timestamp =  date("g");
         $array = array($timestamp, $body, $method, $uri);
         $array  =  implode($array);
         $string = trim($array);
@@ -48,7 +51,7 @@ class PropertiesController extends FOSRestController
             return ['data' => $properties];
         } else {
 
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of the token or the user's private key", "token" => $my_token], Response::HTTP_NOT_ACCEPTABLE);
         }
 
 
@@ -61,11 +64,14 @@ class PropertiesController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        if (!$user){
+            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+        }
         $uri = $request->getUri();
         $method = $request->getMethod();
         $body = $request->request->all();
         $body =  implode($body);
-        $timestamp = $user->getCreated();
+        $timestamp =  date("g");
         $array = array($timestamp, $body, $method, $uri);
         $array  =  implode($array);
         $string = trim($array);
@@ -94,11 +100,14 @@ class PropertiesController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        if (!$user){
+            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+        }
         $uri = $request->getUri();
         $method = $request->getMethod();
         $body = $request->request->all();
         $body =  implode($body);
-        $timestamp = $user->getCreated();
+        $timestamp =  date("g");
         $array = array($timestamp, $body, $method, $uri);
         $array  =  implode($array);
         $string = trim($array);
@@ -132,11 +141,14 @@ class PropertiesController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        if (!$user){
+            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+        }
         $uri = $request->getUri();
         $method = $request->getMethod();
         $body = $request->request->all();
         $body =  implode($body);
-        $timestamp = $user->getCreated();
+        $timestamp =  date("g");
         $array = array($timestamp, $body, $method, $uri);
         $array  =  implode($array);
         $string = trim($array);
@@ -171,11 +183,14 @@ class PropertiesController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        if (!$user){
+            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+        }
         $uri = $request->getUri();
         $method = $request->getMethod();
         $body = $request->request->all();
         $body =  implode($body);
-        $timestamp = $user->getCreated();
+        $timestamp =  date("g");
         $array = array($timestamp, $body, $method, $uri);
         $array  =  implode($array);
         $string = trim($array);

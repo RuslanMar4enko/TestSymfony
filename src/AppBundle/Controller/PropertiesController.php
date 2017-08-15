@@ -85,7 +85,7 @@ class PropertiesController extends FOSRestController
             }
             return ['data' => $properties];
         } else {
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of the token or the user's private key", "token" => $my_token], Response::HTTP_NOT_ACCEPTABLE);;
         }
 
 
@@ -171,7 +171,7 @@ class PropertiesController extends FOSRestController
                 return new View(["message" => "Properties  cannot be empty"], Response::HTTP_NOT_ACCEPTABLE);
             }
         } else {
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of the token or the user's private key", "token" => $my_token], Response::HTTP_NOT_ACCEPTABLE);
         }
 
     }
@@ -208,7 +208,7 @@ class PropertiesController extends FOSRestController
             }
             return new View("deleted successfully", Response::HTTP_OK);
         } else {
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of the token or the user's private key", "token" => $my_token], Response::HTTP_NOT_ACCEPTABLE);
         }
     }
 

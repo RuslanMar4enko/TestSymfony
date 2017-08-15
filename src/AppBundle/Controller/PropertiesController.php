@@ -30,7 +30,7 @@ class PropertiesController extends FOSRestController
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
         if (!$user){
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
         $uri = $request->getUri();
         $method = $request->getMethod();
@@ -51,7 +51,7 @@ class PropertiesController extends FOSRestController
             return ['data' => $properties];
         } else {
 
-            return new View(["message" => "Mismatches of the token or the user's private key", "token" => $my_token], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of  the user's private key", "token" => $my_token], Response::HTTP_NOT_ACCEPTABLE);
         }
 
 
@@ -65,7 +65,7 @@ class PropertiesController extends FOSRestController
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
         if (!$user){
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
         $uri = $request->getUri();
         $method = $request->getMethod();
@@ -101,7 +101,7 @@ class PropertiesController extends FOSRestController
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
         if (!$user){
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
         $uri = $request->getUri();
         $method = $request->getMethod();
@@ -128,7 +128,7 @@ class PropertiesController extends FOSRestController
 
             return ['data' => $properties];
         } else {
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
 
 
@@ -142,7 +142,7 @@ class PropertiesController extends FOSRestController
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
         if (!$user){
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches of or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
         $uri = $request->getUri();
         $method = $request->getMethod();
@@ -184,7 +184,7 @@ class PropertiesController extends FOSRestController
         $reposytory = $em->getRepository('AppBundle:User');
         $user = $reposytory->findOneBy(['user_id' => $user_id]);
         if (!$user){
-            return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
+            return new View(["message" => "Mismatches or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
         $uri = $request->getUri();
         $method = $request->getMethod();

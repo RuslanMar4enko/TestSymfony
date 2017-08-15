@@ -19,24 +19,34 @@ use AppBundle\Entity\User;
 class PropertiesController extends FOSRestController
 {
 
+
     /**
      * @return array
      */
     public function indexAction(Request $request)
     {
-        $token = $request->headers->get('X-AUTH-TOKEN');
-        $user_id = $request->headers->get ('X-USER-ID');
+        $user_id = $request->headers->get('X-USER-ID');
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
-        $user = $reposytory->findOneBy(['token'=>$token, 'user_id'=>$user_id]);
-
-        if($user){
+        $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        $uri = $request->getUri();
+        $method = $request->getMethod();
+        $body = $request->request->all();
+        $body =  implode($body);
+        $timestamp = $user->getCreated();
+        $array = array($timestamp, $body, $method, $uri);
+        $array  =  implode($array);
+        $string = trim($array);
+        $secretKey = $user->getUserId();;
+        $my_token = hash_hmac('sha256', $string, $secretKey );
+        $token = $request->headers->get('X-AUTH-TOKEN');
+        if ($my_token === $token && $user) {
             $properties = $this->getDoctrine()->getRepository('AppBundle:Propertie')->findAll();
             if ($properties === null) {
                 return ['message' => 'there are no Propertie exist'];
             }
             return ['data' => $properties];
-        }else{
+        } else {
 
             return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
@@ -47,19 +57,28 @@ class PropertiesController extends FOSRestController
 
     public function showAction($id, Request $request)
     {
-        $token = $request->headers->get('X-AUTH-TOKEN');
-        $user_id = $request->headers->get ('X-USER-ID');
+        $user_id = $request->headers->get('X-USER-ID');
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
-        $user = $reposytory->findOneBy(['token'=>$token, 'user_id'=>$user_id]);
-
-        if($user){
+        $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        $uri = $request->getUri();
+        $method = $request->getMethod();
+        $body = $request->request->all();
+        $body =  implode($body);
+        $timestamp = $user->getCreated();
+        $array = array($timestamp, $body, $method, $uri);
+        $array  =  implode($array);
+        $string = trim($array);
+        $secretKey = $user->getUserId();;
+        $my_token = hash_hmac('sha256', $string, $secretKey );
+        $token = $request->headers->get('X-AUTH-TOKEN');
+        if ($my_token === $token && $user) {
             $properties = $this->getDoctrine()->getRepository('AppBundle:Propertie')->find($id);
             if ($properties === null) {
                 return ['message' => ' Propertie not found'];
             }
             return ['data' => $properties];
-        }else{
+        } else {
             return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
 
@@ -70,13 +89,23 @@ class PropertiesController extends FOSRestController
     public function createAction(Request $request)
     {
 
-        $token = $request->headers->get('X-AUTH-TOKEN');
-        $user_id = $request->headers->get ('X-USER-ID');
+
+        $user_id = $request->headers->get('X-USER-ID');
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
-        $user = $reposytory->findOneBy(['token'=>$token, 'user_id'=>$user_id]);
-
-        if($user){
+        $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        $uri = $request->getUri();
+        $method = $request->getMethod();
+        $body = $request->request->all();
+        $body =  implode($body);
+        $timestamp = $user->getCreated();
+        $array = array($timestamp, $body, $method, $uri);
+        $array  =  implode($array);
+        $string = trim($array);
+        $secretKey = $user->getUserId();;
+        $my_token = hash_hmac('sha256', $string, $secretKey );
+        $token = $request->headers->get('X-AUTH-TOKEN');
+        if ($my_token === $token && $user) {
             $body = $request->request->all();
             $properties = new Propertie();
             $form = $this->createForm(PropertieType::class, $properties, [
@@ -89,7 +118,7 @@ class PropertiesController extends FOSRestController
             $em->flush();
 
             return ['data' => $properties];
-        }else{
+        } else {
             return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
 
@@ -99,12 +128,22 @@ class PropertiesController extends FOSRestController
 
     public function updateAction($id, Request $request)
     {
-        $token = $request->headers->get('X-AUTH-TOKEN');
-        $user_id = $request->headers->get ('X-USER-ID');
+        $user_id = $request->headers->get('X-USER-ID');
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
-        $user = $reposytory->findOneBy(['token'=>$token, 'user_id'=>$user_id]);
-        if($user){
+        $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        $uri = $request->getUri();
+        $method = $request->getMethod();
+        $body = $request->request->all();
+        $body =  implode($body);
+        $timestamp = $user->getCreated();
+        $array = array($timestamp, $body, $method, $uri);
+        $array  =  implode($array);
+        $string = trim($array);
+        $secretKey = $user->getUserId();;
+        $my_token = hash_hmac('sha256', $string, $secretKey );
+        $token = $request->headers->get('X-AUTH-TOKEN');
+        if ($my_token === $token && $user) {
             $body = $request->request->all();
             $properties = $this->getDoctrine()->getRepository('AppBundle:Propertie')->find($id);
             if ($properties) {
@@ -119,7 +158,7 @@ class PropertiesController extends FOSRestController
             } else {
                 return new View(["message" => "Properties  cannot be empty"], Response::HTTP_NOT_ACCEPTABLE);
             }
-        }else{
+        } else {
             return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
 
@@ -128,12 +167,22 @@ class PropertiesController extends FOSRestController
 
     public function deleteAction($id, Request $request)
     {
-        $token = $request->headers->get('X-AUTH-TOKEN');
-        $user_id = $request->headers->get ('X-USER-ID');
+        $user_id = $request->headers->get('X-USER-ID');
         $em = $this->getDoctrine()->getManager();
         $reposytory = $em->getRepository('AppBundle:User');
-        $user = $reposytory->findOneBy(['token'=>$token, 'user_id'=>$user_id]);
-        if($user){
+        $user = $reposytory->findOneBy(['user_id' => $user_id]);
+        $uri = $request->getUri();
+        $method = $request->getMethod();
+        $body = $request->request->all();
+        $body =  implode($body);
+        $timestamp = $user->getCreated();
+        $array = array($timestamp, $body, $method, $uri);
+        $array  =  implode($array);
+        $string = trim($array);
+        $secretKey = $user->getUserId();;
+        $my_token = hash_hmac('sha256', $string, $secretKey );
+        $token = $request->headers->get('X-AUTH-TOKEN');
+        if ($my_token === $token && $user) {
             $sn = $this->getDoctrine()->getManager();
             $properties = $this->getDoctrine()->getRepository('AppBundle:Propertie')->find($id);
             if (!$properties) {
@@ -143,13 +192,10 @@ class PropertiesController extends FOSRestController
                 $sn->flush();
             }
             return new View("deleted successfully", Response::HTTP_OK);
-        }else{
+        } else {
             return new View(["message" => "Mismatches of the token or the user's private key"], Response::HTTP_NOT_ACCEPTABLE);
         }
     }
-
-
-
 
 
 }
